@@ -2,7 +2,7 @@
 % Please edit documentation in R/ht_1pop_prop.R
 \name{ht_1pop_prop}
 \alias{ht_1pop_prop}
-\title{Hypothesis Testing for Proportion}
+\title{Hypothesis testing for the population proportion}
 \usage{
 ht_1pop_prop(
   x,
@@ -15,48 +15,45 @@ ht_1pop_prop(
 )
 }
 \arguments{
-\item{x}{a (non-empty) numeric vector indicating the number of success. It can also be a vector with number of success, and it can be vector of 0 and 1.}
+\item{x}{a (non-empty) numeric vector indicating the number of successes. It can also be a vector with the number of successes, or it can be vector of 0 and 1.}
 
-\item{n}{a (non-empty) numeric vector indicating the number of trials. It can also be a vector with number of trials (if \code{x} is vector of success), and it can be \code{NULL} (if \code{x} is a vector of 0 e 1).}
+\item{n}{a (non-empty) numeric vector indicating the number of trials. It can also be a vector with the number of trials (if \code{x} is a vector of successes), or it can be \code{NULL} (if \code{x} is a vector of 0 e 1).}
 
 \item{proportion}{a number between 0 e 1 indicating the value in the null hypothesis. Default value is 0.5.}
 
 \item{alternative}{a character string specifying the alternative hypothesis, must be one of ‘"two.sided"’ (default), ‘"greater"’ or ‘"less"’.  You can specify just the initial letter.}
 
-\item{conf_level}{a number indicating the confidence level to compute the confidence interval. If \code{conf_level = NULL}, then confidence interval is not included in the output. Default value is \code{NULL}.}
+\item{conf_level}{a number indicating the confidence level to compute the confidence interval. If \code{conf_level = NULL}, then the confidence interval is not included in the output. Default value is \code{NULL}.}
 
 \item{sig_level}{a number indicating the significance level to use in the General Procedure for Hypotheiss Testing.}
 
-\item{na.rm}{a logical value indicating whether ‘NA’ values should be stripped before the computation proceeds.}
+\item{na.rm}{a logical value indicating whether \code{NA} values should be removed before the computation proceeds.}
 }
 \value{
 a \code{tibble} with the following columns:
 \describe{
-\item{statistic}{the value of statistic.}
+\item{statistic}{the value of the test statistic.}
 \item{p_value}{the p-value for the test.}
 \item{critical_value}{critical value in the General Procedure for Hypothesis Testing.}
 \item{critical_region}{critical region in the General Procedure for Hypothesis Testing.}
-\item{proportion}{a number indicating the true value of the sigma.}
+\item{proportion}{a number indicating the true value of the proportion.}
 \item{alternative}{character string giving the direction of the alternative hypothesis.}
-\item{lower_ci}{lower bound of the confidence interval. Is is present only if \code{!is.null(con_level)}.}
-\item{upper_ci}{upper bound of the confidence interval. Is is present only if \code{!is.null(con_level)}.}
+\item{lower_ci}{lower bound of the confidence interval. It is presented only if \code{!is.null(con_level)}.}
+\item{upper_ci}{upper bound of the confidence interval. It is presented only if \code{!is.null(con_level)}.}
 }
 }
 \description{
-One-sample test to proportion.
-}
-\details{
-I have wrapped the book of Millard and Neerchal (2001) <ISBN: 978-0-367-39814-9>.
+One-sample test for proportion.
 }
 \examples{
-amostra <- rbinom(1, size = 100, prob = 0.75)
-ht_1pop_prop(amostra, proportion = 0.75, 100, conf_level = 0.99)
+sample <- rbinom(1, size = 100, prob = 0.75)
+ht_1pop_prop(sample, proportion = 0.75, 100, conf_level = 0.99)
 
-amostra <- c(rbinom(1, size = 10, prob = 0.75),
+sample <- c(rbinom(1, size = 10, prob = 0.75),
 rbinom(1, size = 20, prob = 0.75),
 rbinom(1, size = 30, prob = 0.75))
-ht_1pop_prop(amostra, c(10, 20, 30), proportion = 0.99, conf_level = 0.90, alternative = 'less')
+ht_1pop_prop(sample, c(10, 20, 30), proportion = 0.99, conf_level = 0.90, alternative = 'less')
 
-amostra <- rbinom(100, 1, prob = 0.75)
-ht_1pop_prop(amostra, proportion = 0.01, conf_level = 0.95, alternative = 'greater')
+sample <- rbinom(100, 1, prob = 0.75)
+ht_1pop_prop(sample, proportion = 0.01, conf_level = 0.95, alternative = 'greater')
 }

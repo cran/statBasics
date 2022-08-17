@@ -14,8 +14,8 @@ output <- ht_1pop_mean(amostra, mu = mu0_1, sig_level = sig_level, conf_level = 
 testthat::test_that("t-test bilateral, decision H0",{
     testthat::expect_equal(output$statistic, base::unname(stats::t.test(amostra, mu = mu0_1, conf.level = conf_level)$statistic))
     testthat::expect_equal(output$p_value, base::unname(stats::t.test(amostra, mu = mu0_1, conf.level = conf_level)$p.value))
-    testthat::expect_equal(output$lower_ci, ci_norm(amostra, conf_level = conf_level)$lower_ci)
-    testthat::expect_equal(output$upper_ci, ci_norm(amostra, conf_level = conf_level)$upper_ci)
+    testthat::expect_equal(output$lower_ci, ci_1pop_norm(amostra, conf_level = conf_level)$lower_ci)
+    testthat::expect_equal(output$upper_ci, ci_1pop_norm(amostra, conf_level = conf_level)$upper_ci)
     testthat::expect_equal(output$critical_value, qt(1 - sig_level / 2, df = size - 1))
 })
 
@@ -27,8 +27,8 @@ output <- ht_1pop_mean(amostra, mu = -1 * mu0_1, sig_level = sig_level, conf_lev
 testthat::test_that("t-test less, decision H0",{
     testthat::expect_equal(output$statistic, base::unname(stats::t.test(amostra, mu = -1 * mu0_1, conf.level = conf_level, alternative = "less")$statistic))
     testthat::expect_equal(output$p_value, base::unname(stats::t.test(amostra, mu = -1 * mu0_1, conf.level = conf_level, alternative = "less")$p.value))
-    testthat::expect_equal(output$lower_ci, ci_norm(amostra, conf_level = conf_level)$lower_ci)
-    testthat::expect_equal(output$upper_ci, ci_norm(amostra, conf_level = conf_level)$upper_ci)
+    testthat::expect_equal(output$lower_ci, ci_1pop_norm(amostra, conf_level = conf_level)$lower_ci)
+    testthat::expect_equal(output$upper_ci, ci_1pop_norm(amostra, conf_level = conf_level)$upper_ci)
     testthat::expect_equal(output$critical_value, qt(sig_level, df = size - 1))
 })
 
@@ -40,8 +40,8 @@ output <- ht_1pop_mean(amostra, mu = mu0_1, sig_level = sig_level, conf_level = 
 testthat::test_that("t-test greater, decision H0",{
     testthat::expect_equal(output$statistic, base::unname(stats::t.test(amostra, mu = mu0_1, conf.level = conf_level, alternative = "greater")$statistic))
     testthat::expect_equal(output$p_value, base::unname(stats::t.test(amostra, mu = mu0_1, conf.level = conf_level, alternative = "greater")$p.value))
-    testthat::expect_equal(output$lower_ci, ci_norm(amostra, conf_level = conf_level)$lower_ci)
-    testthat::expect_equal(output$upper_ci, ci_norm(amostra, conf_level = conf_level)$upper_ci)
+    testthat::expect_equal(output$lower_ci, ci_1pop_norm(amostra, conf_level = conf_level)$lower_ci)
+    testthat::expect_equal(output$upper_ci, ci_1pop_norm(amostra, conf_level = conf_level)$upper_ci)
     testthat::expect_equal(output$critical_value, qt(1 - sig_level, df = size - 1))
 })
 
@@ -53,8 +53,8 @@ output <- ht_1pop_mean(amostra, mu = mu0_1, sig_level = sig_level, conf_level = 
 testthat::test_that("z-test bilateral, decision H0",{
     testthat::expect_equal(output$statistic, base::unname(BSDA::z.test(amostra, mu = mu0_1, conf.level = conf_level, sigma.x = sd_pop)$statistic))
     testthat::expect_equal(output$p_value, base::unname(BSDA::z.test(amostra, mu = mu0_1, conf.level = conf_level, sigma.x = sd_pop)$p.value))
-    testthat::expect_equal(output$lower_ci, ci_norm(amostra, conf_level = conf_level, sd_pop = sd_pop)$lower_ci)
-    testthat::expect_equal(output$upper_ci, ci_norm(amostra, conf_level = conf_level, sd_pop = sd_pop)$upper_ci)
+    testthat::expect_equal(output$lower_ci, ci_1pop_norm(amostra, conf_level = conf_level, sd_pop = sd_pop)$lower_ci)
+    testthat::expect_equal(output$upper_ci, ci_1pop_norm(amostra, conf_level = conf_level, sd_pop = sd_pop)$upper_ci)
     testthat::expect_equal(output$critical_value, qnorm(1 - sig_level / 2))
 })
 
@@ -66,8 +66,8 @@ output <- ht_1pop_mean(amostra, mu = -1 * mu0_1, sig_level = sig_level, conf_lev
 testthat::test_that("t-test less, decision H0",{
     testthat::expect_equal(output$statistic, base::unname(BSDA::z.test(amostra, mu = -1 * mu0_1, conf.level = conf_level, alternative = "less", sigma.x = sd_pop)$statistic))
     testthat::expect_equal(output$p_value, base::unname(BSDA::z.test(amostra, mu = -1 * mu0_1, conf.level = conf_level, alternative = "less", sigma.x = sd_pop)$p.value))
-    testthat::expect_equal(output$lower_ci, ci_norm(amostra, conf_level = conf_level, sd_pop = sd_pop)$lower_ci)
-    testthat::expect_equal(output$upper_ci, ci_norm(amostra, conf_level = conf_level, sd_pop = sd_pop)$upper_ci)
+    testthat::expect_equal(output$lower_ci, ci_1pop_norm(amostra, conf_level = conf_level, sd_pop = sd_pop)$lower_ci)
+    testthat::expect_equal(output$upper_ci, ci_1pop_norm(amostra, conf_level = conf_level, sd_pop = sd_pop)$upper_ci)
     testthat::expect_equal(output$critical_value, qnorm(sig_level))
 })
 
@@ -79,7 +79,7 @@ output <- ht_1pop_mean(amostra, mu = mu0_1, sig_level = sig_level, conf_level = 
 testthat::test_that("t-test greater, decision H0",{
     testthat::expect_equal(output$statistic, base::unname(BSDA::z.test(amostra, mu = mu0_1, conf.level = conf_level, alternative = "greater", sigma.x = sd_pop)$statistic))
     testthat::expect_equal(output$p_value, base::unname(BSDA::z.test(amostra, mu = mu0_1, conf.level = conf_level, alternative = "greater", sigma.x = sd_pop)$p.value))
-    testthat::expect_equal(output$lower_ci, ci_norm(amostra, conf_level = conf_level, sd_pop = sd_pop)$lower_ci)
-    testthat::expect_equal(output$upper_ci, ci_norm(amostra, conf_level = conf_level, sd_pop = sd_pop)$upper_ci)
+    testthat::expect_equal(output$lower_ci, ci_1pop_norm(amostra, conf_level = conf_level, sd_pop = sd_pop)$lower_ci)
+    testthat::expect_equal(output$upper_ci, ci_1pop_norm(amostra, conf_level = conf_level, sd_pop = sd_pop)$upper_ci)
     testthat::expect_equal(output$critical_value, qnorm(1 - sig_level))
 })

@@ -1,34 +1,34 @@
-#' Hypothesis Testing for Variance
-#' 
+#' Hypothesis testing for the population variance
+#'
 #' One-Sample chi-squared test on variance.
-#' 
+#'
 #' @param x a (non-empty) numeric vector.
 #' @param sigma a number indicating the true value of the standard deviation in the null hypothesis. Default value is 1.
-#' @param alternative a character string specifying the alternative hypothesis, must be one of ‘"two.sided"’ (default), ‘"greater"’ or ‘"less"’.  You can specify just the initial letter.
-#' @param conf_level a number indicating the confidence level to compute the confidence interval. If \code{conf_level = NULL}, then confidence interval is not included in the output. Default value is \code{NULL}.
+#' @param alternative a character string specifying the alternative hypothesis, must be one of ‘"two.sided"’ (default), ‘"greater"’ or ‘"less"’. You can specify just the initial letter.
+#' @param conf_level a number indicating the confidence level to compute the confidence interval. If \code{conf_level = NULL}, then the confidence interval is not included in the output. Default value is \code{NULL}.
 #' @param sig_level a number indicating the significance level to use in the General Procedure for Hypotheiss Testing.
-#' @param na.rm a logical value indicating whether ‘NA’ values should be stripped before the computation proceeds.
-#' 
+#' @param na.rm a logical value indicating whether \code{NA} values should be remove before the computation proceeds.
+#'
 #' @import stats stringr tibble
-#' 
-#' @details I have wrapped the \code{EnvStats::varTest} in a function as explained in the book of Montgomery and Runger (2010) <ISBN: 978-1-119-74635-5> and in the book of Millard and Neerchal (2001) <ISBN: 978-0-367-39814-9>.
-#' 
+#'
+#' @details We have wrapped the \code{EnvStats::varTest} in a function as explained in the book of Montgomery and Runger (2010) <ISBN: 978-1-119-74635-5>.
+#'
 #' @return a \code{tibble} with the following columns:
 #' \describe{
-#' \item{statistic}{the value of statistic.}
+#' \item{statistic}{the value of the test statistic.}
 #' \item{p_value}{the p-value for the test.}
 #' \item{critical_value}{critical value in the General Procedure for Hypothesis Testing.}
 #' \item{critical_region}{critical region in the General Procedure for Hypothesis Testing.}
-#' \item{sigma}{a number indicating the true value of the sigma.}
+#' \item{sigma}{a number indicating the true value of sigma.}
 #' \item{alternative}{character string giving the direction of the alternative hypothesis.}
-#' \item{lower_ci}{lower bound of the confidence interval. Is is present only if \code{!is.null(con_level)}.}
-#' \item{upper_ci}{upper bound of the confidence interval. Is is present only if \code{!is.null(con_level)}.}
+#' \item{lower_ci}{lower bound of the confidence interval. It is presented only if \code{!is.null(con_level)}.}
+#' \item{upper_ci}{upper bound of the confidence interval. It is presented only if \code{!is.null(con_level)}.}
 #' }
-#' 
+#'
 #' @export
-#' 
-#' @examples 
-#' sample <- rnorm(1000, mean = 10, sd = 2) 
+#'
+#' @examples
+#' sample <- rnorm(1000, mean = 10, sd = 2)
 #' ht_1pop_var(sample, sigma = 1) # H0: sigma = 1
 ht_1pop_var <- function(x, sigma = 1, alternative = "two.sided", conf_level = NULL, sig_level = 0.05, na.rm = TRUE) {
   if (!(alternative %in% c("two.sided", "greater", "less"))) {
@@ -60,7 +60,7 @@ ht_1pop_var <- function(x, sigma = 1, alternative = "two.sided", conf_level = NU
   }
 
   if (!is.null(conf_level)) {
-    ci <- ci_norm(x, conf_level = conf_level, parameter = 'variance')
+    ci <- ci_1pop_norm(x, conf_level = conf_level, parameter = 'variance')
     output <- tibble::tibble(statistic, p_value, critical_value, critical_region, alternative, sigma, sig_level, lower_ci = ci$lower_ci, upper_ci = ci$upper_ci, conf_level = ci$conf_level)
   } else {
     output <- tibble::tibble(statistic, p_value, critical_value, critical_region, alternative, sigma, sig_level)

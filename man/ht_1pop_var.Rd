@@ -2,7 +2,7 @@
 % Please edit documentation in R/ht_1pop_var.R
 \name{ht_1pop_var}
 \alias{ht_1pop_var}
-\title{Hypothesis Testing for Variance}
+\title{Hypothesis testing for the population variance}
 \usage{
 ht_1pop_var(
   x,
@@ -18,34 +18,34 @@ ht_1pop_var(
 
 \item{sigma}{a number indicating the true value of the standard deviation in the null hypothesis. Default value is 1.}
 
-\item{alternative}{a character string specifying the alternative hypothesis, must be one of ‘"two.sided"’ (default), ‘"greater"’ or ‘"less"’.  You can specify just the initial letter.}
+\item{alternative}{a character string specifying the alternative hypothesis, must be one of ‘"two.sided"’ (default), ‘"greater"’ or ‘"less"’. You can specify just the initial letter.}
 
-\item{conf_level}{a number indicating the confidence level to compute the confidence interval. If \code{conf_level = NULL}, then confidence interval is not included in the output. Default value is \code{NULL}.}
+\item{conf_level}{a number indicating the confidence level to compute the confidence interval. If \code{conf_level = NULL}, then the confidence interval is not included in the output. Default value is \code{NULL}.}
 
 \item{sig_level}{a number indicating the significance level to use in the General Procedure for Hypotheiss Testing.}
 
-\item{na.rm}{a logical value indicating whether ‘NA’ values should be stripped before the computation proceeds.}
+\item{na.rm}{a logical value indicating whether \code{NA} values should be remove before the computation proceeds.}
 }
 \value{
 a \code{tibble} with the following columns:
 \describe{
-\item{statistic}{the value of statistic.}
+\item{statistic}{the value of the test statistic.}
 \item{p_value}{the p-value for the test.}
 \item{critical_value}{critical value in the General Procedure for Hypothesis Testing.}
 \item{critical_region}{critical region in the General Procedure for Hypothesis Testing.}
-\item{sigma}{a number indicating the true value of the sigma.}
+\item{sigma}{a number indicating the true value of sigma.}
 \item{alternative}{character string giving the direction of the alternative hypothesis.}
-\item{lower_ci}{lower bound of the confidence interval. Is is present only if \code{!is.null(con_level)}.}
-\item{upper_ci}{upper bound of the confidence interval. Is is present only if \code{!is.null(con_level)}.}
+\item{lower_ci}{lower bound of the confidence interval. It is presented only if \code{!is.null(con_level)}.}
+\item{upper_ci}{upper bound of the confidence interval. It is presented only if \code{!is.null(con_level)}.}
 }
 }
 \description{
 One-Sample chi-squared test on variance.
 }
 \details{
-I have wrapped the \code{EnvStats::varTest} in a function as explained in the book of Montgomery and Runger (2010) <ISBN: 978-1-119-74635-5> and in the book of Millard and Neerchal (2001) <ISBN: 978-0-367-39814-9>.
+We have wrapped the \code{EnvStats::varTest} in a function as explained in the book of Montgomery and Runger (2010) <ISBN: 978-1-119-74635-5>.
 }
 \examples{
-sample <- rnorm(1000, mean = 10, sd = 2) 
+sample <- rnorm(1000, mean = 10, sd = 2)
 ht_1pop_var(sample, sigma = 1) # H0: sigma = 1
 }

@@ -8,7 +8,7 @@ conf_level  <- 0.99
 sig_level <- 0.01
 
 prop_test <- function(amostra, n = NULL, p = 0.5, alternative = "two.sided", conf_level = conf_level) {
-    ci <- ci_bern(amostra, conf_level = conf_level)
+    ci <- ci_1pop_bern(amostra, conf_level = conf_level)
     output <- prop.test(sum(amostra), length(amostra), p = p, alternative = alternative, conf.level = conf_level, correct = FALSE)
     list(
         statistic = base::unname(output$statistic),

@@ -13,7 +13,7 @@ var_test <- function(x, alternative = "two.sided", conf_level = 0.95, sigma = 1)
     output <- EnvStats::varTest(x, alternative = alternative, conf.level = conf_level, sigma.squared = sigma ^ 2)
   })
 
-  ci <- ci_norm(x, conf_level = conf_level, parameter = 'variance')
+  ci <- ci_1pop_norm(x, conf_level = conf_level, parameter = 'variance')
   list(
         statistic = base::unname(output$statistic),
         p_value = base::unname(output$p.value),
