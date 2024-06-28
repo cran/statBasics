@@ -151,7 +151,8 @@ ht_2pop_mean <- function(x, y, delta = 0, sd_pop_1 = NULL, sd_pop_2 = NULL, var_
       critical_value = critical_value,
       critical_region = critical_region,
       delta = delta,
-      alternative = alternative
+      alternative = alternative,
+      sig_level = sig_level
     )
   } else {
     ci <- ci_2pop_norm(x, y, sd_pop_1, sd_pop_2, var_equal, na.rm = T, type = type, conf_level = conf_level)
@@ -162,8 +163,10 @@ ht_2pop_mean <- function(x, y, delta = 0, sd_pop_1 = NULL, sd_pop_2 = NULL, var_
       critical_region = critical_region,
       delta = delta,
       alternative = alternative,
+      sig_level = sig_level,
       lower_ci = ci$lower_ci,
-      upper_ci = ci$upper_ci
+      upper_ci = ci$upper_ci,
+      conf_level = conf_level
     )
   }
 

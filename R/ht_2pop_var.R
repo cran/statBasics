@@ -31,7 +31,7 @@
 #' x <- rnorm(100, sd = 2)
 #' y <- rnorm(1000, sd = 10)
 #' ht_2pop_var(x, y)
-ht_2pop_var <- function(x, y, ratio = 1, alternative = "two.sided", conf_level = FALSE, sig_level = 0.05, na_rm = FALSE) {
+ht_2pop_var <- function(x, y, ratio = 1, alternative = "two.sided", conf_level = NULL, sig_level = 0.05, na_rm = FALSE) {
   if (!(alternative %in% c("two.sided", "greater", "less"))) {
     stop("'alternative' must be one of 'two.sided', 'greater' or 'less'.")
   }
@@ -83,18 +83,23 @@ ht_2pop_var <- function(x, y, ratio = 1, alternative = "two.sided", conf_level =
       statistic = statistic,
       p_value = p_value,
       critical_vale = critical_value,
-      ratio = ratio,
+      critical_region = critical_region,
       alternative = alternative,
+      ratio = ratio,
+      sig_level = sig_level,
       lower_ci = ci$lower_ci,
-      upper_ci = ci$upper_ci
+      upper_ci = ci$upper_ci,
+      conf_level = conf_level
     )
   } else {
     output <- tibble::tibble(
       statistic = statistic,
       p_value = p_value,
       critical_vale = critical_value,
+      critical_region = critical_region,
+      alternative = alternative,
       ratio = ratio,
-      alternative = alternative
+      sig_level = sig_level
     )
   }
 

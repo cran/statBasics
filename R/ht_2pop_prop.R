@@ -1,5 +1,5 @@
 #' Hypothesis testing for two population porportions
-#' 
+#'
 #' Comparing proportions in two populations
 #'
 #' \code{ht_2pop_prop} can be used for testing the null hipothesis that proportions (probabilities of success) in two groups are the same.
@@ -55,7 +55,7 @@ ht_2pop_prop <- function(x, y, n_x = NULL, n_y = NULL, delta = 0, alternative = 
     y <- y[!is.na(y)]
   }
 
-  print(!is.null(conf_level))
+  # print(!is.null(conf_level))
   if (!is.null(conf_level)) {
     if (conf_level < 0 || conf_level > 1) {
       stop("'conf_level' must be a number between 0 and 1.")
@@ -148,7 +148,8 @@ ht_2pop_prop <- function(x, y, n_x = NULL, n_y = NULL, delta = 0, alternative = 
       critical_value = critical_value,
       critical_region = critical_region,
       delta = delta,
-      alternative = alternative
+      alternative = alternative,
+      sig_level = sig_level
     )
   } else {
     ci <- ci_2pop_bern(x, y, n_x, n_y, na.rm = T, type = type, conf_level = conf_level)
@@ -159,8 +160,10 @@ ht_2pop_prop <- function(x, y, n_x = NULL, n_y = NULL, delta = 0, alternative = 
       critical_region = critical_region,
       delta = delta,
       alternative = alternative,
+      sig_level = sig_level,
       lower_ci = ci$lower_ci,
-      upper_ci = ci$upper_ci
+      upper_ci = ci$upper_ci,
+      conf_level = conf_level
     )
   }
 

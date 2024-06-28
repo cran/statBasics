@@ -1,6 +1,6 @@
 Package: statBasics
 Title: Basic Functions to Statistical Methods Course
-Version: 0.2.0
+Version: 0.2.2
 Authors@R: c(
     person(given = "Gilberto",
            family = "Sassi",
@@ -15,12 +15,12 @@ Description: Basic statistical methods with some modifications for the course St
 Imports: tibble, stats, stringr
 License: MIT + file LICENSE
 Encoding: UTF-8
-RoxygenNote: 7.1.2
+RoxygenNote: 7.3.1
 Suggests: testthat (>= 3.0.0), EnvStats, BSDA, purrr
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2022-08-17 21:49:31 UTC; gilberto
+Packaged: 2024-06-28 21:18:09 UTC; gilberto
 Author: Gilberto Sassi [aut, cre],
   Carolina Costa Mota Paraíba [aut]
 Repository: CRAN
-Date/Publication: 2022-08-17 22:20:06 UTC
+Date/Publication: 2024-06-28 21:40:02 UTC

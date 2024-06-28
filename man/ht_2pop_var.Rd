@@ -9,7 +9,7 @@ ht_2pop_var(
   y,
   ratio = 1,
   alternative = "two.sided",
-  conf_level = FALSE,
+  conf_level = NULL,
   sig_level = 0.05,
   na_rm = FALSE
 )

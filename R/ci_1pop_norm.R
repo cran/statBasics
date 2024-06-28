@@ -29,7 +29,7 @@ ci_1pop_norm <- function(x, sd_pop = NULL, parameter = "mean", conf_level = 0.95
     stop("'type' must be one of 'two.sided', 'left' or 'right'.")
   }
 
-  if (conf_level < 0 | conf_level > 1) {
+  if (conf_level < 0 || conf_level > 1) {
     stop("'conf_level' must be a number between 0 and 1.")
   }
 
@@ -41,11 +41,12 @@ ci_1pop_norm <- function(x, sd_pop = NULL, parameter = "mean", conf_level = 0.95
     stop("'parameter' must be one of 'mean' or 'variance'.")
   }
 
-  if (!is.null(sd_pop) & parameter %in% "variance") {
+  if (!is.null(sd_pop) && parameter %in% "variance") {
     warning("You should not build a confidence interval for the variance if you know the populational standard deviation.")
   }
 
   n <- length(x)
+
   if (parameter == 'mean') {
     if (is.null(sd_pop)) {
       if (type == 'two.sided') {
